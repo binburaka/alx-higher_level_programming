@@ -16,7 +16,4 @@ int is_palindrome(listint_t **head)
 	while (temp) /* get len of list */
 	{
 		temp = temp->next;
-		len++;
-	}
-	return (0);
-}
+
