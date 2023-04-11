@@ -1,4 +1,4 @@
-#!/usr/bin/nodw
+#!/usr/bin/node
 /*
  * print Javascript is Amazing
  */
