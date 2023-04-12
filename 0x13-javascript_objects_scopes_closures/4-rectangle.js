@@ -2,6 +2,8 @@
 /*
     Class 2 init arg if are int and > 0
     create a print method
+    create a double method
+    create a rotate method
 */
 
 class Rectangle {
@@ -16,6 +18,17 @@ class Rectangle {
     for (let height = 0; height < this.height; height++) {
       console.log('X'.repeat(this.width));
     }
+  }
+
+  rotate () {
+    const holder = this.height;
+    this.height = this.width;
+    this.width = holder;
+  }
+
+  double () {
+    this.height = this.height * 2;
+    this.width = this.width * 2;
   }
 }
 
