@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """
-Prints the first State object from the database
+Lists all State objects, and corresponding City objects
 """
 from sys import argv
-from model_state import Base, State
+from relationship_state import Base, State
+from relationship_city import City
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+
 
 if __name__ == "__main__":
     engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
@@ -13,9 +15,7 @@ if __name__ == "__main__":
                            pool_pre_ping=True)
     Session = sessionmaker(bind=engine)
     session = Session()
-    state = session.query(State).first()
-    if state:
-        print("{}: {}".format(state.id, state.name))
-    else:
-        print("Nothing")
+    for state in session.query(State):
+        for city in state.cities:
+            print("{:d}: {} -> {}".format(city.id, city.name, state.name))
     session.close()

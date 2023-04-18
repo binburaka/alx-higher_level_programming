@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Prints the first State object from the database
+Adds the State object “Louisiana” to the database
 """
 from sys import argv
 from model_state import Base, State
@@ -13,9 +13,8 @@ if __name__ == "__main__":
                            pool_pre_ping=True)
     Session = sessionmaker(bind=engine)
     session = Session()
-    state = session.query(State).first()
-    if state:
-        print("{}: {}".format(state.id, state.name))
-    else:
-        print("Nothing")
+    state = State(name="Louisiana")
+    session.add(state)
+    session.commit()
+    print(state.id)
     session.close()
