@@ -2,14 +2,13 @@
 """
 Sends a request to the URL and displays the body of the response.
 """
-import requests
-from sys import argv
+if __name__ == '__main__':
+    from sys import argv
+    from requests import get
 
+    url = argv[1]
 
-if __name__ == "__main__":
-    try:
-        res = requests.get(argv[1])
-        res.raise_for_status()
-        print(res.text)
-    except:
-        print("Error code: {}".format(res.status_code))
+    response = get(url)
+    ERR_TXT = 'Error code: {}'
+    status = response.status_code
+    print(ERR_TXT.format(status) if (status >= 400) else response.text)
