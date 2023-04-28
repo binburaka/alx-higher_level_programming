@@ -4,34 +4,21 @@
 
 
 def find_peak(list_of_integers):
-    """Find peak in unsorted list
-    """
-    loi = list_of_integers
-    size = len(loi)
-
-    if size == 0:
+    """Find a peak in a list of unsorted integers."""
+    if len(list_of_integers) == 0:
         return None
+    elif len(list_of_integers) == 1:
+        return list_of_integers[0]
 
-    if size is 1:
-        return loi[0]
-
-    return recurse(loi, 0, size - 1)
-
-
-def recurse(loi, left, right):
-    """Recursive component
-    """
-    mid = int((left + right) / 2)
-
-    if left > right:
-        return loi[mid]
-
-    if (mid == 0 or loi[mid] > loi[mid - 1])\
-       and (mid == len(loi) - 1 or loi[mid] > loi[mid + 1]):
-        return loi[mid]
-
-    # recurse left
-    elif (mid > 0) and loi[mid - 1] > loi[mid]:
-        return recurse(loi, left, mid - 1)
-    else:  # recurse right
-        return recurse(loi, mid + 1, right)
+    h = len(list_of_integers) - 1
+    l = 0
+    lis = list_of_integers
+    while h > l:
+        half = (h + l) // 2
+        if lis[half] <= lis[half + 1]:
+            l = half + 1
+        elif lis[half] <= lis[half - 1]:
+            h = half - 1
+        elif lis[half] >= lis[half + 1] and lis[half] >= lis[half - 1]:
+            return lis[half]
+    return lis[l]
